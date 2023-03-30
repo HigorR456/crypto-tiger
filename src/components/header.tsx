@@ -7,8 +7,8 @@ const Header = () => {
         <>
             <header className='header-wrap'>
                 <div className='title'>
-                    <GiTigerHead />
-                    Crypto-Tiger
+                    <GiTigerHead className='tiger-head' />
+                    <div className='title-text'>Crypto-Tiger</div>
                 </div>
 
                 <nav className='nav-wrap'>
