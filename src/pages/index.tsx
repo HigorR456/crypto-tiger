@@ -5,9 +5,10 @@ import Footer from '../components/footer'
 
 import {AiFillCheckCircle} from 'react-icons/ai'
 import {BsCoin} from 'react-icons/bs'
+import {IoMdArrowDropup, IoMdArrowDropdown} from 'react-icons/io'
 
 export async function getStaticProps() {
-  const data = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=15&page=1&sparkline=false&locale=en')
+  const data = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false&locale=en')
   const list = await data.json()
 
   return {
@@ -100,12 +101,21 @@ export default function Home({ list }: any) {
                   <div className='symbol'>{e.symbol.toUpperCase()}</div>
                 </div>
                 <div className='current-price'><div className='money'>$</div>{e.current_price.toFixed(2)}</div>
-                <div className='price-change' style={e.price_change_percentage_24h > 0 ? {color: '#16c784'} : {color: '#ea3943'}}>{e.price_change_percentage_24h.toFixed(2)}</div>
+                <div className='price-change' style={e.price_change_percentage_24h > 0 ? {color: '#16c784'} : {color: '#ea3943'}}>
+                  {e.price_change_percentage_24h > 0 ? 
+                  <IoMdArrowDropup /> : 
+                  <IoMdArrowDropdown />}
+                  {e.price_change_percentage_24h.toFixed(2)}
+                </div>
                 <div className='list-market-cap'><div className='money'>$</div>{e.market_cap}</div>
               </div>
 
               return result;
             })}
+            </div>
+
+            <div className='button-wrap'>
+              <button className='see-more-btn'>See More</button>
             </div>
 
           </div>

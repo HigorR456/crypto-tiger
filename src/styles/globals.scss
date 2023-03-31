@@ -50,3 +50,89 @@ body {
         }
     }
 }
+
+//footer
+
+.footer-wrap {
+    filter: brightness(120%);
+    background: rgba(255, 255, 255, 0.05);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @media all and (max-width: 660px) { padding-inline: 5%;}
+
+    min-height: 200px;
+
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+
+        width: 66%;
+        @media all and (max-width: 960px) { width: 80%; }
+        @media all and (max-width: 660px) { width: 100%; }
+        max-width: 1280px;
+
+        .first-row {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            margin-bottom: 40px;
+            width: 100%;
+            .logo {
+                font-weight: bold;
+                font-size: 25px;
+                display: flex;
+                align-items: center;
+        
+                .tiger-head {
+                    min-width: 30px;
+                }
+                .title-text {
+                    @media all and (max-width: 300px) { visibility: hidden; width: 0px; }
+                }
+            }
+            .pages {
+                .nav-wrap {
+                    @media all and (max-width: 620px) {margin-right: 15px;}
+                    display: flex;
+                    flex-direction: column;
+                    
+                    .nav-link {
+                        color: white;
+                        text-decoration: none;
+                        margin-inline: 10px;
+                         @media all and (max-width: 620px) {margin-inline: 5px;}
+                    }
+                }
+            }
+        }
+
+        .second-row {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            .copyright {}
+            .downloads {
+                display: grid;
+                grid-template-columns: 32px 32px;
+                column-gap: 10px;
+                .logo-wrap {
+                    border: 2px solid rgba(255, 255, 255, 0.3);
+                    width: 32px;
+                    height: 32px;
+                    border-radius: 7.5px;
+                    
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    .logo {
+                        font-size: 28px;
+                    }
+                }
+            }
+        }
+    }
+}
