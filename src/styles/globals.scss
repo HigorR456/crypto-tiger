@@ -109,12 +109,35 @@ body {
 
         .second-row {
             display: flex;
+            flex-wrap: wrap;
             justify-content: space-between;
+            align-items: center;
             width: 100%;
-            margin-top: 40px;
             margin-bottom: 20px;
-            .copyright {}
+
+            @media all and (max-width: 620px) {
+                flex-direction: column-reverse;
+            }
+
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+
+            .legal {
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                margin-top: 40px;
+                span { 
+                    margin-right: 10px; 
+                    display: flex; 
+                    align-items: center;
+                }
+                .links {
+                    a { margin: 0 4px; &:hover { cursor: pointer; } }
+                }
+            }
+
             .downloads {
+                margin-top: 40px;
                 display: grid;
                 grid-template-columns: 32px 32px;
                 column-gap: 10px;
@@ -127,6 +150,8 @@ body {
                     display: flex;
                     justify-content: center;
                     align-items: center;
+
+                    &:hover { cursor: pointer; }
 
                     .logo {
                         font-size: 28px;

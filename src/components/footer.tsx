@@ -21,7 +21,7 @@ const Footer = () => {
                                 <Link className='nav-link' href='/'>
                                     Home</Link>
                                 <Link className='nav-link' href='/'>
-                                    Coins</Link>
+                                    Price</Link>
                                 <Link className='nav-link' href='/'>
                                     Contact</Link>
                             </nav>
@@ -29,7 +29,18 @@ const Footer = () => {
                     </div>
 
                     <div className='second-row'>
-                        <div className='copyright'><FaRegCopyright /> 2023. All Rights Reserved.</div>
+                        <div className='legal'>
+                            <span className='copyright'>
+                                <FaRegCopyright />
+                                &nbsp;2023. All Rights Reserved.
+                            </span>
+
+                            <div className='links'>
+                                <a>License</a>
+                                <a>Terms</a>
+                                <a>Privacy</a>
+                            </div>
+                        </div>
 
                         <div className='downloads'>
                             <div className='logo-wrap'>

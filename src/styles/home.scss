@@ -15,32 +15,37 @@
         @media all and (max-width: 660px) { width: 100%; }
         max-width: 1280px;
         min-height: 1080px;
-        max-height: 1440px;
+        max-height: 2160px;
         display: flex;
         align-items: center;
         justify-content: center;
 
+        padding-top: 25px;
+        padding-bottom: 100px;
+
         .container {
             width: 100%;
             .title {
-                font-size: 50px;
-                @media all and (max-width: 960px) { font-size: 40px;}
-                @media all and (max-width: 660px) { font-size: 30px;}
-                @media all and (max-width: 400px) { font-size: 24px;}
+                font-size: 75px;
+                font-weight: bold;
+                text-align: center;
+                @media all and (max-width: 960px) { font-size: 60px;}
+                @media all and (max-width: 660px) { font-size: 45px;}
+                @media all and (max-width: 400px) { font-size: 37px;}
 
-                h1 {
-                    background: linear-gradient(65deg, rgba(25,35,255,1) 32%, rgba(25,255,170,1) 68%);
+                span {
+                    display: block;
+                    background: linear-gradient(10deg, rgba(25,35,255,1) 15%, rgba(24,181,255,1) 25%, rgba(31,223,205,1) 35%, rgba(25,255,170,1) 40%, rgba(31,223,205,1) 50%, rgba(24,181,255,1) 65%, rgba(25,35,255,1) 85%);
                     background-clip: text;
                     text-align: center;
                     margin: 0;
                 }
                 
-                :last-child {
-                    color: rgba(255, 255, 255, 0) }
+                :last-child {color: rgba(255, 255, 255, 0);}
             }
 
             .description {
-                margin-top: 25px;
+                margin-top: 50px;
                 margin-bottom: 25px;
                 margin-inline: 5%;
                 @media all and (max-width: 660px) { margin-inline: 0%;}
@@ -119,10 +124,12 @@
         @media all and (max-width: 620px) { width: 100%; }
         max-width: 1280px;
         min-height: 1080px;
-        max-height: 1440px;
+        max-height: 2160px;
         display: flex;
         align-items: center;
         justify-content: center;
+
+        padding-bottom: 100px;
 
         .container {
             width: 100%;
@@ -133,16 +140,24 @@
                 align-items: center;
                 margin-top: 40px;
                 margin-bottom: 80px;
-                .text {
-                    font-size: 18px;
+                
+                p {
+                    font-size: 20px;
+                    @media all and (max-width: 660px) { font-size: 16px;}
                     text-align: center;
                     font-weight: bold;
                     color: #19b5ff;
                     margin-bottom: 20px;
                 }
 
-                :last-child {
-                    font-size: 45px;
+                span {
+                    font-size: 75px;
+                    font-weight: bold;
+                    text-align: center;
+                    @media all and (max-width: 960px) { font-size: 60px;}
+                    @media all and (max-width: 660px) { font-size: 45px;}
+                    @media all and (max-width: 400px) { font-size: 37px;}
+                    margin: 0;
                     color: white;
                 }
             }
@@ -152,15 +167,23 @@
                 justify-content: center;
                 flex-direction: column;
                 overflow-x: auto;
+                font-size: 20px;
+                @media all and (max-width: 620px) {font-size: 16px;}
+
+                #crypto-head {
+                    height: 50px;
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+                }
     
                 .crypto-list {
                     width: 100%;
                     display: grid;
                     grid-template-columns: 50px 30% 20% 20% 20%;
+                    gap: 10px;
                     align-items: center;
                     align-self: center;
-                    margin-top: 5px;
-                    margin-bottom: 5px;
+                    margin-top: 10px;
+                    margin-bottom: 10px;
                     
                     .list-image {
                         img { 
@@ -185,12 +208,12 @@
                             }
                         }
                         .symbol { 
-                            opacity: 0.3; 
+                            color: rgba(255, 255, 255, 0.3);
                             font-size: 14px; 
                             align-self: end; 
 
                             @media all and (max-width: 600px) {
-                                opacity: 1;
+                                color: white;
                                 font-size: 16px;
                                 align-self: start;
 
@@ -215,6 +238,23 @@
                         width:  90%;
                         .money { margin-right: 5px; }
                     }
+                }
+
+                .loading { 
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 200px;
+                    width: 100%;
+                    .loading-icon {
+                        font-size: 50px;
+                        animation: loading-animation linear 3.3s infinite;
+                    }
+                }
+
+                @keyframes loading-animation {
+                    0% { transform:rotateZ(0deg); }
+                    100% { transform:rotateZ(360deg); }
                 }
             }
 
@@ -243,64 +283,102 @@
         @media all and (max-width: 660px) { width: 100%; }
         max-width: 1280px;
         min-height: 1080px;
-        max-height: 1440px;
+        max-height: 2160px;
         display: flex;
         align-items: center;
         justify-content: center;
+        
+        padding-bottom: 100px;
 
         .container {
-            display: flex;
-            flex-direction: row;
-            @media all and (max-width: 1280px) { display: flex; flex-direction:column; }
-
-            justify-content: center;
-            align-items: center;
-
-            margin-top: 25px;
-            margin-bottom: 25px;
-
-            .box-wrap {
-                width: 25%;
-                @media all and (max-width: 1440px) { width: 30%; }
-                @media all and (max-width: 1280px) { width: 100%; }
-
-                .box {
-                    display: grid;
-                    grid-template-columns: 80px auto;
-                    align-items: center;
-                    height: 100px;
-                    margin-top: 25px;
-                    margin-bottom: 25px;
-
-                    .icon {
-                        width: 60px;
-                        height: 60px;
-                        font-size: 50px;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-
-                        background: linear-gradient(65deg, rgba(25,35,255,1) 32%, rgba(25,255,170,1) 99%);
-                        border-radius: 15px;
-                    }
-                    .text { }
+            .title {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                margin-top: 40px;
+                margin-bottom: 80px;
+                p {
+                    font-size: 20px;
+                    @media all and (max-width: 660px) { font-size: 16px;}
+                    text-align: center;
+                    font-weight: bold;
+                    color: #19b5ff;
+                    margin-bottom: 20px;
+                }
+                span {
+                    font-size: 75px;
+                    font-weight: bold;
+                    text-align: center;
+                    @media all and (max-width: 960px) { font-size: 60px;}
+                    @media all and (max-width: 660px) { font-size: 45px;}
+                    @media all and (max-width: 400px) { font-size: 37px;}
+                    margin: 0;
+                    color: white;
                 }
             }
 
-            .box-wrap-image {
-                width: 50%;
-                @media all and (max-width: 1440px) { width: 40%; }
-                @media all and (max-width: 1280px) { width: 90%; }
-                .image {
-                    width: 100%;
+            .content {
+                display: flex;
+                flex-direction: row;
+                @media all and (max-width: 1280px) { display: flex; flex-direction:column; }
+    
+                justify-content: center;
+                align-items: center;
+    
+                margin-top: 25px;
+                margin-bottom: 25px;
+    
+                .box-wrap {
+                    width: 30%;
+                    @media all and (max-width: 1280px) { width: 100%; }
+    
+                    .box {
+                        display: grid;
+                        grid-template-columns: 80px calc(100% - 100px);
+                        align-items: center;
+                        height: 100%;
+                        margin-top: 25px;
+                        margin-bottom: 25px;
+    
+                        .icon {
+                            width: 50px;
+                            height: 50px;
+                            font-size: 30px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            color: white;
+    
+                            background: linear-gradient(65deg, rgba(25,35,255,1) 32%, rgba(25,255,170,1) 99%);
+                            border-radius: 15px;
+                        }
+                        .text { 
+                            span {
+                                font-weight: bold;
+                                font-size: 20px;
+                            }
+                            p { margin: 0; margin-top: 5px; }
+                        }
+                    }
+                }
+    
+                .box-wrap-image {
+                    margin-inline: 10px;
 
-                    display: flex;
-                    justify-content: center;
-                    .trade-anywhere-image { 
-                        z-index: -1;
-                        width: 100%; 
-                        max-width: 500px; 
-                        filter: drop-shadow(0px 0px 80px #1923ff);
+                    width: 40%;
+                    @media all and (max-width: 1280px) { width: 90%; }
+                    .image {
+                        width: 100%;
+    
+                        display: flex;
+                        justify-content: center;
+                        .trade-anywhere-image { 
+                            z-index: -1;
+                            width: 100%; 
+                            max-width: 500px; 
+                            filter: drop-shadow(0px 0px 80px #1923ff);
+                        }
                     }
                 }
             }
