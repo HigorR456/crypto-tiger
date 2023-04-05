@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Head from 'next/head'
 import Header from '../components/header'
 import Footer from '../components/footer'
@@ -12,24 +12,74 @@ import {BsCoin, BsGraphUpArrow, BsCurrencyExchange,} from 'react-icons/bs'
 import {BiChip} from 'react-icons/bi'
 import {MdOutlineManageAccounts} from 'react-icons/md'
 
+
 export async function getStaticProps() {
   const response = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false&locale=en')
-
   if (!response.ok) {
     console.log('Error', response.status)
   }
-  
-  const list = await response.json()
-
+  const data = await response.json()
   return {
-    props: {list}
+    props: {data}
   }
 }
 
-export default function Home({ list }: any) {
+
+export function usePrevious(value: any) {
+  const ref = useRef([{current_price: 0}]);
   useEffect(() => {
-    console.log(list)
-  },[])
+    ref.current = value;
+  }, [value]);
+  return ref.current;
+}
+
+
+export default function Home({ data }: any) {
+  const [list, setList] = useState<any>(data);
+  const prevList = usePrevious(list);
+
+  const handleUpdateEffect = (price: any, i: any) => {
+    if (prevList.length === 1) {
+      console.log('prevlist length equal 1')
+      return ''
+    } else if (price > prevList[i].current_price) {
+      console.log(price - prevList[i].current_price);
+      return 'current-price-down'
+    } else if (price < prevList[i].current_price) {
+      console.log(price - prevList[i].current_price);
+      return 'current-price-up'
+    } else {
+      console.log(price - prevList[i].current_price);
+      return 'current-price-keep'
+    }
+  }
+
+  async function getUpdate() {
+    console.log('fetch')
+    const response = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false&locale=en')
+    const data = await response.json()
+
+    return data
+  }
+
+  useEffect(() => {
+    let interval = setInterval(async () => {
+      console.log('setInterval');
+      let data = [];
+
+      try {
+        data = await getUpdate();
+        setList(data);
+        console.log('data was setted')
+      } catch (err) {
+        console.log('Error', err);
+      }
+    }, 20000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
 
   return (
     <>
@@ -102,16 +152,18 @@ export default function Home({ list }: any) {
                 <div className='list-market-cap'><b>Market Cap.</b></div>
               </div>
 
-            {list.length > 0 ? 
-              list.map((e:any) => {
+            {list.length > 1 ? 
+              list.map((e:any, index:any) => {
                 const result = 
-                <div className='crypto-list' key={e.name}>
+                <div className='crypto-list' key={e.name + new Date().getTime()}>
                   <div className='list-image'><img src={e.image} alt={e.id}></img></div>
                   <div className='list-name'>
                     <div className='long-name'>{e.name}</div>
                     <div className='symbol'>{e.symbol.toUpperCase()}</div>
                   </div>
-                  <div className='current-price'><div className='money'>$</div>{e.current_price.toFixed(2)}</div>
+                  <div className='current-price' 
+                  id={handleUpdateEffect(e.current_price, index)} 
+                  key={e.current_price}><div className='money'>$</div>{e.current_price.toFixed(2)}</div>
                   <div className='price-change' 
                   style={e.price_change_percentage_24h > 0 ? 
                   {color: '#16c784'} : {color: '#ea3943'}}>
