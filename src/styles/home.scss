@@ -1,6 +1,51 @@
 //main
 * {border: 0px solid red;}
 
+@keyframes title {
+    0% { opacity: 0; transform: translateY(8%) translateZ(0); }
+    100% { opacity: 1; transform: translateY(0%) translateZ(0); }
+}
+
+@keyframes description {
+    0% { opacity: 0; transform: translateY(8%) translateZ(0); }
+    100% { opacity: 1; transform: translateY(0%) translateZ(0); }
+}
+
+@keyframes list {
+    0% { opacity: 0; transform: translateY(8%) translateZ(0); }
+    100% { opacity: 1; transform: translateY(0%) translateZ(0); }
+}
+
+@keyframes text {
+    0% { opacity: 0; transform: translateX(8%) translateZ(0); }
+    100% { opacity: 1; transform: translateX(0%) translateZ(0); }
+}
+
+@keyframes flip-phone {
+    0% {
+        transform-origin: 50% 0px;
+        transform: rotateX(40deg) translateZ(0);
+    }
+    100% {
+        transform-origin: 50% 0px;
+        transform: rotateX(0deg) translateZ(0);
+    }
+}
+
+.title-animation { animation: title 0.3s ease-in-out forwards; }
+.title { opacity: 0; }
+
+.descr-animation { animation: description 0.3s ease-in-out forwards; }
+.description { opacity: 0; }
+
+.list-animation { animation: list 0.3s ease-in-out forwards; }
+.crypto-list-wrap { opacity: 0; }
+
+.text-animation { animation: text 0.3s ease-in-out forwards; }
+.text { opacity: 0; }
+
+.box-wrap { opacity: 0; }
+
 .main-wrap {
     display: flex;
     flex-direction: column;
@@ -97,6 +142,8 @@
                     max-width: 500px;
                     z-index: -1;
 
+                    perspective: 1000px;
+
                     .back-blur {
                         width: 100%;
                         max-width: 1920px;
@@ -110,7 +157,8 @@
 
                     .app-image {
                         width: 90%;
-                        filter: drop-shadow(0px 0px 90px #19ffaa);
+                        filter: drop-shadow(0px 0px 90px #19ffaa);    transform-origin: 50% 0px;
+                        transform: rotateX(40deg) translateZ(0);
                     }
                 }
                 
@@ -230,29 +278,32 @@
 
                     @keyframes price-up {
                         0% { color: #16c784; }
+                        10% { color: #16c784; }
                         100% { color: white; }
                     }
 
                     @keyframes price-down {
                         0% { color: #ea3943; }
+                        10% { color: #ea3943; }
                         100% { color: white; }
                     }
 
                     @keyframes price-keep {
                         0% { color: #8b8b8b; }
+                        10% { color: #8b8b8b; }
                         100% { color: white; }
                     }
 
                     #current-price-up {
-                        animation: price-up 5s linear forwards;
+                        animation: price-up 3.3s ease-in-out forwards;
                     }
 
                     #current-price-down {
-                        animation: price-down 5s linear forwards;
+                        animation: price-down 3.3s ease-in-out forwards;
                     }
 
                     #current-price-keep {
-                        animation: price-keep 5s linear forwards;
+                        animation: price-keep 3.3s ease-in-out forwards;
                     }
 
                     .price-change {
@@ -367,7 +418,8 @@
                         align-items: center;
                         height: 100%;
                         margin-top: 25px;
-                        margin-bottom: 25px;
+                        margin-bottom: 25px; 
+                        overflow: hidden;
     
                         .icon {
                             width: 50px;
@@ -382,11 +434,13 @@
                             border-radius: 15px;
                         }
                         .text { 
+                            color: white;
+                            opacity: 1;
                             span {
                                 font-weight: bold;
                                 font-size: 20px;
                             }
-                            p { margin: 0; margin-top: 5px; }
+                            p { margin: 0; margin-top: 5px;  }
                         }
                     }
                 }

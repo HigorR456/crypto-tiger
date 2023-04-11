@@ -12,7 +12,7 @@ import {BsCoin, BsGraphUpArrow, BsCurrencyExchange,} from 'react-icons/bs'
 import {BiChip} from 'react-icons/bi'
 import {MdOutlineManageAccounts} from 'react-icons/md'
 
-
+//fetch data
 export async function getStaticProps() {
   const response = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false&locale=en')
   if (!response.ok) {
@@ -20,11 +20,12 @@ export async function getStaticProps() {
   }
   const data = await response.json()
   return {
+    revalidate: 300,
     props: {data}
   }
 }
 
-
+//usePrevious custom hook
 export function usePrevious(value: any) {
   const ref = useRef([{current_price: 0}]);
   useEffect(() => {
@@ -33,29 +34,74 @@ export function usePrevious(value: any) {
   return ref.current;
 }
 
+//useAnimateOnScroll parameter
+const options = {
+  root: null,
+  rootMargin: '-75px 0px 0px 0px',
+  threshold: 0.24,
+ }
+//useAnimateOnScroll custom hook
+ function useAnimateOnScroll(element: Array<HTMLElement | null>) {
+  const [isAnimating, setIsAnimating] = useState<{[key: string]: boolean}>({});
 
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      console.log(entries);
+      entries.map((e: any) => {
+        const name = e.target.id
+        if (e.isIntersecting) {
+          setIsAnimating((prev) => {
+            return {
+              ...prev, [name]: true,
+            }
+          });
+        } else {
+          setIsAnimating((prev) => {
+            return {
+              ...prev, [name]: false,
+            }
+          })
+        }
+        
+      })
+    }, options);
+
+    element.map((e: HTMLElement | null) => {
+      observer.observe(e!);
+    });
+  }, [element]);
+  console.log(isAnimating);
+  console.log(isAnimating['box1']);
+  return isAnimating;
+ }
+
+
+//Home Page
 export default function Home({ data }: any) {
-  const [list, setList] = useState<any>(data);
+  const [list, setList] = useState<Array<object>>(data);
   const prevList = usePrevious(list);
+
+  const [element, setElement] = useState<Array<HTMLElement | null>>([]);
+  const isAnimating = useAnimateOnScroll(element);
+  let elementArray: Array<HTMLElement | null> = [];
+
+  const handleScroll = (e: any) => {
+    console.log(e);
+  }
 
   const handleUpdateEffect = (price: any, i: any) => {
     if (prevList.length === 1) {
-      console.log('prevlist length equal 1')
       return ''
     } else if (price > prevList[i].current_price) {
-      console.log(price - prevList[i].current_price);
-      return 'current-price-down'
-    } else if (price < prevList[i].current_price) {
-      console.log(price - prevList[i].current_price);
       return 'current-price-up'
+    } else if (price < prevList[i].current_price) {
+      return 'current-price-down'
     } else {
-      console.log(price - prevList[i].current_price);
       return 'current-price-keep'
     }
   }
 
   async function getUpdate() {
-    console.log('fetch')
     const response = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false&locale=en')
     const data = await response.json()
 
@@ -63,18 +109,19 @@ export default function Home({ data }: any) {
   }
 
   useEffect(() => {
+    setElement([...elementArray]);
+    console.log(elementArray);
+
     let interval = setInterval(async () => {
-      console.log('setInterval');
       let data = [];
 
       try {
         data = await getUpdate();
         setList(data);
-        console.log('data was setted')
       } catch (err) {
         console.log('Error', err);
       }
-    }, 20000);
+    }, 60000);
 
     return () => {
       clearInterval(interval);
@@ -94,12 +141,16 @@ export default function Home({ data }: any) {
         <section className='hero-section'>
           <div className='container'>
 
-            <div className='title'>
+            <div id='title1' className={`title ${isAnimating['title1'] ? 'title-animation' : ''}`} ref={(ref) => {
+              elementArray.push(ref);
+            }}>
               <span>The World's Fastest</span>
               <span>Cryptocurrency Platform!</span>
             </div>
 
-            <div className='description'>
+            <div id='descr1' className={`description ${isAnimating['descr1'] ? 'descr-animation' : ''}`} ref={(ref) => {
+              elementArray.push(ref);
+            }}>
               <div className='description-div'>
                 <AiFillCheckCircle className='check-circle'/>
                 <div className='text-div'>
@@ -137,12 +188,16 @@ export default function Home({ data }: any) {
         <section className='list-section'>
           <div className='container'>
 
-            <div className='title'>
+            <div id='title2' className={`title ${isAnimating['title2'] ? 'title-animation' : ''}`} ref={(ref) => {
+              elementArray.push(ref);
+            }}>
               <p>FASTELY BUY, SELL, STORE, SEND and TRACK</p>
               <span>Buy crypto the fatest way</span>
             </div>
-
-            <div className='crypto-list-wrap'>
+            
+            <div id='list1' className={`crypto-list-wrap ${isAnimating['list1'] ? 'list-animation' : ''}`} ref={(ref) => {
+              elementArray.push(ref);
+            }}>
 
               <div className='crypto-list' id='crypto-head'>
                 <div className='list-image'></div>
@@ -197,13 +252,17 @@ export default function Home({ data }: any) {
         <section className='anywhere-section'>
           <div className='container'>
 
-            <div className='title'>
+            <div id='title3' className={`title ${isAnimating['title3'] ? 'title-animation' : ''}`} ref={(ref) => {
+              elementArray.push(ref);
+            }}>
               <p>TRADE ANYTIME, ANYWHERE</p>
               <span>Available on all device</span>
             </div>
 
             <div className='content'>
-              <div className='box-wrap'>
+              <div id='box1' className={`box-wrap ${isAnimating['box1'] ? 'text-animation' : ''}`} ref={(ref) => {
+              elementArray.push(ref);
+            }}>
                 <div className='box'>
                   <div className='icon'><TbWallet/></div>
                   <div className='text'>
@@ -237,7 +296,9 @@ export default function Home({ data }: any) {
               </div>
 
 
-              <div className='box-wrap'>
+              <div id='box2' className={`box-wrap ${isAnimating['box2'] ? 'text-animation' : ''}`} ref={(ref) => {
+              elementArray.push(ref);
+            }}>
                 <div className='box'>
                     <div className='icon'><BiChip/></div>
                     <div className='text'>

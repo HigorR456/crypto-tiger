@@ -6,7 +6,7 @@ const Header = () => {
     return (
         <>
             <header className='header-wrap'>
-                <div className='title'>
+                <div className='header-title'>
                     <GiTigerHead className='tiger-head' />
                     <div className='title-text'>Crypto-Tiger</div>
                 </div>
