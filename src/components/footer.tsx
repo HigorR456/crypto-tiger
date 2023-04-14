@@ -20,10 +20,8 @@ const Footer = () => {
                             <nav className='nav-wrap'>
                                 <Link className='nav-link' href='/'>
                                     Home</Link>
-                                <Link className='nav-link' href='/'>
-                                    Price</Link>
-                                <Link className='nav-link' href='/'>
-                                    Contact</Link>
+                                <Link className='nav-link' href='/about'>
+                                    About</Link>
                             </nav>
                         </div>
                     </div>

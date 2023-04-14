@@ -7,14 +7,15 @@ const Header = () => {
         <>
             <header className='header-wrap'>
                 <div className='header-title'>
-                    <GiTigerHead className='tiger-head' />
-                    <div className='title-text'>Crypto-Tiger</div>
+                    <Link className='header-link' href='/'>
+                        <GiTigerHead className='tiger-head' />
+                        <div className='title-text'>Crypto-Tiger</div>
+                    </Link>
                 </div>
 
                 <nav className='nav-wrap'>
                     <Link className='nav-link' href='/'>Home</Link>
-                    <Link className='nav-link' href='/'>Price</Link>
-                    <Link className='nav-link' href='/'>Contact</Link>
+                    <Link className='nav-link' href='/about'>About</Link>
                 </nav>
             </header>
         </>

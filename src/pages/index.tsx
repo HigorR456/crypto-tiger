@@ -18,7 +18,7 @@ export async function getStaticProps() {
   if (!response.ok) {
     console.log('Error', response.status)
   }
-  const data = await response.json()
+  const data: Array<object> = await response.json()
   return {
     revalidate: 300,
     props: {data}
@@ -71,7 +71,6 @@ const options = {
     });
   }, [element]);
   console.log(isAnimating);
-  console.log(isAnimating['box1']);
   return isAnimating;
  }
 
@@ -84,10 +83,6 @@ export default function Home({ data }: any) {
   const [element, setElement] = useState<Array<HTMLElement | null>>([]);
   const isAnimating = useAnimateOnScroll(element);
   let elementArray: Array<HTMLElement | null> = [];
-
-  const handleScroll = (e: any) => {
-    console.log(e);
-  }
 
   const handleUpdateEffect = (price: any, i: any) => {
     if (prevList.length === 1) {
@@ -110,7 +105,6 @@ export default function Home({ data }: any) {
 
   useEffect(() => {
     setElement([...elementArray]);
-    console.log(elementArray);
 
     let interval = setInterval(async () => {
       let data = [];
@@ -178,7 +172,9 @@ export default function Home({ data }: any) {
               <button className='download-app-btn'>Download the App</button>
               <div className='app-image-wrap'>
                 <div className='back-blur'></div>
-                <img className='app-image' src='/downloadtheapp.png' alt='app image'></img>
+                <div className='image-wrap'>
+                  <img id='scrollImg' className='app-image' src='/downloadtheapp.png' alt='app image'></img>
+                </div>
               </div>
             </div>
             
@@ -260,30 +256,33 @@ export default function Home({ data }: any) {
             </div>
 
             <div className='content'>
-              <div id='box1' className={`box-wrap ${isAnimating['box1'] ? 'text-animation' : ''}`} ref={(ref) => {
-              elementArray.push(ref);
-            }}>
-                <div className='box'>
-                  <div className='icon'><TbWallet/></div>
-                  <div className='text'>
-                    <span>LINK YOUR WALLET</span>
-                    <p>Join the app using the supported wallet of your preference.</p>
-                  </div>
-                </div>
 
-                <div className='box'>
-                  <div className='icon'> <BsCoin  /></div>
-                  <div className='text'>
-                    <span>PICK YOUR AMOUNT</span>
-                    <p>Buy any amount of any cryptocurrency you want.</p>
+              <div className='box-wrap-text'>
+                <div id='box1' className={`box-wrap ${isAnimating['box1'] ? 'text-animation' : ''}`} ref={(ref) => {
+                elementArray.push(ref);
+              }}>
+                  <div className='box'>
+                    <div className='icon'><TbWallet/></div>
+                    <div className='text'>
+                      <span>LINK YOUR WALLET</span>
+                      <p>Join the app using the supported wallet of your preference.</p>
+                    </div>
                   </div>
-                </div>
 
-                <div className='box'>
-                  <div className='icon'><BsGraphUpArrow/></div>
-                  <div className='text'>
-                    <span>VERIFY YOUR TRANSACTION</span>
-                    <p>Make a profit by selling your crypto on our marketplace.</p>
+                  <div className='box'>
+                    <div className='icon'> <BsCoin  /></div>
+                    <div className='text'>
+                      <span>PICK YOUR AMOUNT</span>
+                      <p>Buy any amount of any cryptocurrency you want.</p>
+                    </div>
+                  </div>
+
+                  <div className='box'>
+                    <div className='icon'><BsGraphUpArrow/></div>
+                    <div className='text'>
+                      <span>VERIFY YOUR TRANSACTION</span>
+                      <p>Make a profit by selling your crypto on our marketplace.</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -295,34 +294,36 @@ export default function Home({ data }: any) {
                 </div>
               </div>
 
-
-              <div id='box2' className={`box-wrap ${isAnimating['box2'] ? 'text-animation' : ''}`} ref={(ref) => {
-              elementArray.push(ref);
-            }}>
-                <div className='box'>
-                    <div className='icon'><BiChip/></div>
-                    <div className='text'>
-                      <span>ACQUIRE PERSONALIZATED NFTs</span>
-                      <p>Consolidate all your digital assets in a single platform.</p>
-                    </div>
-                  </div>
-
+              <div className='box-wrap-text'>
+                <div id='box2' className={`box-wrap ${isAnimating['box2'] ? 'text-animation2' : ''}`} ref={(ref) => {
+                elementArray.push(ref);
+              }}>
                   <div className='box'>
-                    <div className='icon'><BsCurrencyExchange/></div>
-                    <div className='text'>
-                      <span>PARTICIPATE IN THE MARKET</span>
-                      <p>Find and trade the perfect crypto collections on our platform.</p>
+                      <div className='icon'><BiChip/></div>
+                      <div className='text'>
+                        <span>ACQUIRE PERSONALIZATED NFTs</span>
+                        <p>Consolidate all your digital assets in a single platform.</p>
+                      </div>
                     </div>
-                  </div>
 
-                  <div className='box'>
-                    <div className='icon'><MdOutlineManageAccounts/></div>
-                    <div className='text'>
-                      <span>MANAGE YOUR COLLECTION</span>
-                      <p>Easily explore, invest, and handle your digital assets.</p>
+                    <div className='box'>
+                      <div className='icon'><BsCurrencyExchange/></div>
+                      <div className='text'>
+                        <span>PARTICIPATE IN THE MARKET</span>
+                        <p>Find and trade the perfect crypto collections on our platform.</p>
+                      </div>
                     </div>
-                  </div>
+
+                    <div className='box'>
+                      <div className='icon'><MdOutlineManageAccounts/></div>
+                      <div className='text'>
+                        <span>MANAGE YOUR COLLECTION</span>
+                        <p>Easily explore, invest, and handle your digital assets.</p>
+                      </div>
+                    </div>
+                </div>
               </div>
+              
             </div>
 
           </div>
