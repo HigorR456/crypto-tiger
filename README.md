@@ -1,3 +1,26 @@
+<div align='center'><img src='https://github.com/HigorR456/crypto-tiger/assets/109878939/99c254a5-c59e-4ba4-a27f-e376f7961816'/></div>
+
+<h2>About the project</h2>
+
+This project is a Cryptocurrency Platform website built with React, Next.js and SASS. Concept based on SSG where pages are pre-rendered on build time, increasing performance and with fast navigation. It features a modern and intuitive design based on crypto.com.
+
+👉Live demo: https://crypto-tiger.netlify.app/
+
+<h3>Build with:</h3>
+
+» React JS <br>
+» Next.js <br>
+» SASS
+
+<h2>📸Screenshot of the Project</h2>
+<br>
+
+<div align='center'>
+<img src='https://github.com/HigorR456/crypto-tiger/assets/109878939/3e32c989-2a8b-49f9-b1d8-3bfc77e38d90'/>
+</div>
+
+______________________________________________________________
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
